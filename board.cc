@@ -57,7 +57,6 @@ bool Board::placeship(Ship &ship, int x, int y, char direction)
         {
             int row = x + i;
             board[row][y] = 'S';
-            ship.addPos(i,row,y);
         }
     }
     else if (direction == 'h')
@@ -66,7 +65,6 @@ bool Board::placeship(Ship &ship, int x, int y, char direction)
         {
             int col = y + i;
             board[x][col] = 'S';
-            ship.addPos(i,x,col);
         }
     }
     return true;
