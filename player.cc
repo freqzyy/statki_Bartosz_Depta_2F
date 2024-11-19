@@ -58,7 +58,7 @@ void Player::getShipPlacement(int &x, int &y, char &direction)
         {
             cout << "Podaj liczbe calkowita" << endl;
             cin.clear();
-            cin.ignore(1000 , '\n');
+            cin.ignore(numeric_limits <streamsize>::max(), '\n');
         }
         else if (x < 0)
         {
@@ -80,7 +80,7 @@ void Player::getShipPlacement(int &x, int &y, char &direction)
             {
                 cout << "Podaj liczbe calkowita" << endl;
                 cin.clear();
-                cin.ignore(1000 , '\n');
+                cin.ignore(numeric_limits <streamsize>::max(), '\n');
             }
             else if (y < 0)
             {
@@ -107,7 +107,7 @@ void Player::getShipPlacement(int &x, int &y, char &direction)
             {
                 cout << "Podany kierunek jest niepoprawny" << endl;
                 cin.clear();
-                cin.ignore(1000, '\n');
+                cin.ignore(numeric_limits <streamsize>::max(), '\n');
             }
         }
 }
@@ -129,10 +129,28 @@ bool Player::noShipsLeft()
     return true;
 }
 
-// Sprawdzanie czy gracz trafil w statek
+// Sprawdzanie czy gracz trafil w statek i czy wpisal dobre wspolrzedne
 
 bool Player::PlrShoot(Player &opponent, int x, int y)
 {
+
+    bool validInput = false;
+
+    do
+    {
+        cout << "Podaj wspolrzedne strzalu(x,y):";
+        cin >> y >> x;
+        if (cin.fail() || x < 0 || x >= size)
+        {
+            cout << "Niepoprawne wspolrzedne" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits <streamsize>::max(), '\n');
+            continue;
+        }
+
+        validInput = true;
+    } while (validInput == false);
+
     bool hit = opponent.ownBoard.shoot(x,y);
     if (hit)
     {
