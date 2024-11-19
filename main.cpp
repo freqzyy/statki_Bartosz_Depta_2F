@@ -14,7 +14,7 @@ void Clear() {
 // Zamiana z drugim graczem
 void PlayersSwap()
 {
-    cout << "Nacisnij dowolny przycisk, aby zmienic sie z drugim graczem" << endl;
+    cout << "Nacisnij ENTER, aby zmienic sie z drugim graczem" << endl;
     cin.ignore(numeric_limits <streamsize>::max(), '\n');
     cin.get();
 }
@@ -46,8 +46,6 @@ int main()
         player1.ownBoard.display(false);
         cout << "Plansza przeciwnika:" << endl;
         player1.shotsBoard.display(true);
-        cout << "Podaj wspolrzedne strzalu(x,y): ";
-        cin >> y >> x;
         player1.PlrShoot(player2, x, y);
 
         if (player2.noShipsLeft() == true)
@@ -64,8 +62,6 @@ int main()
         player2.ownBoard.display(false);
         cout << "Plansza przeciwnika:" << endl;
         player2.shotsBoard.display(true);
-        cout << "Podaj wspolrzedne strzalu(x,y): ";
-        cin >> y >> x;
         player2.PlrShoot(player1, x, y);
 
 
