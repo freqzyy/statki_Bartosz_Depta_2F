@@ -140,7 +140,7 @@ bool Player::PlrShoot(Player &opponent, int x, int y)
     {
         cout << "Podaj wspolrzedne strzalu(x,y):";
         cin >> y >> x;
-        if (cin.fail() || x < 0 || x >= size)
+        if (cin.fail() || x < 0 || x >= size || y < 0 || y >= size)
         {
             cout << "Niepoprawne wspolrzedne" << endl;
             cin.clear();
