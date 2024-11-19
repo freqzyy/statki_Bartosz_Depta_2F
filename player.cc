@@ -70,46 +70,46 @@ void Player::getShipPlacement(int &x, int &y, char &direction)
         }
     }
 
-        validInput = false;
-        
-        while (validInput == false)
+    validInput = false;
+    
+    while (validInput == false)
+    {
+        cout << "Podaj kolumne(0-" << size - 1 << "): ";
+        cin >> y;
+        if (cin.fail())
         {
-            cout << "Podaj kolumne(0-" << size - 1 << "): ";
-            cin >> y;
-            if (cin.fail())
-            {
-                cout << "Podaj liczbe calkowita" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits <streamsize>::max(), '\n');
-            }
-            else if (y < 0)
-            {
-                cout << "Podana liczba jest mniejsza od zera" << endl;
-            }
-            else
-            {
-                validInput = true;
-            }
+            cout << "Podaj liczbe calkowita" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits <streamsize>::max(), '\n');
         }
-
-        validInput = false;
-
-        while (validInput == false)
+        else if (y < 0)
         {
-            cout << "Podaj kierunek (h - poziomo,  v - pionowo): ";
-            cin >> direction;
-
-            if (direction == 'h' || direction == 'v')
-            {
-                validInput = true;
-            }
-            else
-            {
-                cout << "Podany kierunek jest niepoprawny" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits <streamsize>::max(), '\n');
-            }
+            cout << "Podana liczba jest mniejsza od zera" << endl;
         }
+        else
+        {
+            validInput = true;
+        }
+    }
+
+    validInput = false;
+
+    while (validInput == false)
+    {
+        cout << "Podaj kierunek (h - poziomo,  v - pionowo): ";
+        cin >> direction;
+
+        if (direction == 'h' || direction == 'v')
+        {
+            validInput = true;
+        }
+        else
+        {
+            cout << "Podany kierunek jest niepoprawny" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits <streamsize>::max(), '\n');
+        }
+    }
 }
 
 // Sprawdzenie czy gracz nie ma juz statkow/czy drugi gracz wygral 
@@ -149,7 +149,8 @@ bool Player::PlrShoot(Player &opponent, int x, int y)
         }
 
         validInput = true;
-    } while (validInput == false);
+    } 
+    while (validInput == false);
 
     bool hit = opponent.ownBoard.shoot(x,y);
     if (hit)
