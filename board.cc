@@ -28,6 +28,33 @@ bool Board::placeship(Ship &ship, int x, int y, char direction)
         return false;
     }
 
+    for (int i = 0; i < ship.length_of_ship; i++)
+    {
+        for (int dx = -1; dx <= 1; dx++)
+        {
+            for (int dy = -1; dy <= 1; dy++)
+            {
+                int checkX, checkY;
+
+                if (direction == 'h') {
+                    checkX = x + dx;
+                    checkY = y + i + dy;
+                } 
+                else if (direction == 'v')
+                {
+                    checkX = x + i + dx;
+                    checkY = y + dy;
+                }
+
+                if (checkX >= 0 && checkX < size && checkY >= 0 && checkY < size) {
+                    if (board[checkX][checkY] == 'S') {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+        
     if (direction == 'v')
     {
         for (int i = 0; i < ship.length_of_ship; i++)
