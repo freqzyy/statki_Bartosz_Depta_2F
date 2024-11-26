@@ -17,6 +17,10 @@ void PlayersSwap()
     cout << "Nacisnij ENTER, aby zmienic sie z drugim graczem" << endl;
     cin.ignore(numeric_limits <streamsize>::max(), '\n');
     cin.get();
+    Clear();
+    cout << "Kiedy drugi gracz bedzie gotowy, nacisnij ENTER" << endl;
+    cin.ignore(numeric_limits <streamsize>::max(), '\n');
+    Clear();
 }
 
 int main()
@@ -25,17 +29,16 @@ int main()
     Player player2;
     player1.AddShips();
     player2.AddShips();
-
+    
     cout << "Graczu 1 ustaw swoje statki:" << endl;
-    player1.setupShips();
+    player1.setupShips(player1);
 
     PlayersSwap();
-    Clear();
     
     cout << "Graczu 2 ustaw swoje statki:" << endl;
-    player2.setupShips();
+    player2.setupShips(player2);
     
-    Clear();
+    PlayersSwap();
 
     int x,y;
     bool gameover = false;
@@ -56,7 +59,6 @@ int main()
         }
 
         PlayersSwap();
-        Clear();
 
         cout << "Graczu 2, oto twoja plansza:" << endl;
         player2.ownBoard.display(false);
@@ -73,7 +75,6 @@ int main()
         }
 
         PlayersSwap();
-        Clear();
     };
     return 0;
 }
