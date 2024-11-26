@@ -19,10 +19,11 @@ void Player::AddShips()
 
 // Stawianie statkow
 
-void Player::setupShips()
+void Player::setupShips(Player &currentplayer)
 {
     for (int i = 0; i < 10; i++)
     {
+        currentplayer.ownBoard.display(false);
         cout << "Postaw " << ships[i].length_of_ship << "-masztowiec" << endl;
         int x,y;
         char direction;
@@ -34,10 +35,11 @@ void Player::setupShips()
             if (placed == false)
             {
                 cout << "Nie mozna umiescic tutaj statku, sprobuj ponownie." << endl;
+                currentplayer.ownBoard.display(false);
             }
             else
             {
-                cout << "Statek pomyslnie ustawiony na pozycji: (" << x << ", " << y << ")" << " z kierunkiem: " << direction << endl;
+                cout << "Statek pomyslnie ustawiony na pozycji: (" << y << ", " << x << ")" << " z kierunkiem: " << direction << endl;
             }
         }
         while (placed == false);
@@ -53,14 +55,14 @@ void Player::getShipPlacement(int &x, int &y, char &direction)
     while (validInput == false)
     {
         cout << "Podaj wiersz(0-" << size - 1 << "): ";
-        cin >> x;
+        cin >> y;
         if (cin.fail())
         {
             cout << "Podaj liczbe calkowita" << endl;
             cin.clear();
             cin.ignore(numeric_limits <streamsize>::max(), '\n');
         }
-        else if (x < 0)
+        else if (y < 0)
         {
             cout << "Podana liczba jest mniejsza od zera" << endl;
         }
@@ -75,14 +77,14 @@ void Player::getShipPlacement(int &x, int &y, char &direction)
     while (validInput == false)
     {
         cout << "Podaj kolumne(0-" << size - 1 << "): ";
-        cin >> y;
+        cin >> x;
         if (cin.fail())
         {
             cout << "Podaj liczbe calkowita" << endl;
             cin.clear();
             cin.ignore(numeric_limits <streamsize>::max(), '\n');
         }
-        else if (y < 0)
+        else if (x < 0)
         {
             cout << "Podana liczba jest mniejsza od zera" << endl;
         }
@@ -161,7 +163,7 @@ bool Player::PlrShoot(Player &opponent, int x, int y)
     else
     {
         shotsBoard.board[x][y] = 'O';
-        cout << "Pudło!" << endl;
+        cout << "Pudlo!" << endl;
     }
     return hit;
 }
