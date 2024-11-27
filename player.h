@@ -13,7 +13,7 @@ public:
     int lengths[10] = {1,1,1,1,2,2,2,3,3,4};
     Player();
     void AddShips();
-    void setupShips();
+    void setupShips(Player &currentplayer);
     void getShipPlacement(int &x, int &y, char &direction);
     bool noShipsLeft();
     bool PlrShoot(Player &opponent, int x, int y);
