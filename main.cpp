@@ -7,18 +7,22 @@
 using namespace std;
 
 // Czysci konsole
-void Clear() {
-    cout << "\033[2J\033[1;1H";
+void Clear() 
+{
+    system("cls");
 }
 
 // Zamiana z drugim graczem
-void PlayersSwap()
+void PlayersSwap(Player &secondplayer)
 {
-    cout << "Nacisnij ENTER, aby zmienic sie z drugim graczem" << endl;
+    cout << "=========================" << endl;
+    cout << "     ZAMIANA GRACZY" << endl;
+    cout << "=========================" << endl;
+    cout << "Nacisnij ENTER i odejdz od komputera" << endl;
     cin.ignore(numeric_limits <streamsize>::max(), '\n');
     cin.get();
     Clear();
-    cout << "Kiedy drugi gracz bedzie gotowy, nacisnij ENTER" << endl;
+    cout << secondplayer.name << " nacisnij ENTER, aby grac" << endl;
     cin.ignore(numeric_limits <streamsize>::max(), '\n');
     Clear();
 }
@@ -30,51 +34,56 @@ int main()
     player1.AddShips();
     player2.AddShips();
     
-    cout << "Graczu 1 ustaw swoje statki:" << endl;
+    cout << "Podaj imie gracza pierwszego: ";
+    player1.getName(player1);
+    cout << "Podaj imie gracza drugiego: ";
+    player2.getName(player2);
+
+    cout << player1.name << " ustaw swoje statki:" << endl;
     player1.setupShips(player1);
 
-    PlayersSwap();
+    PlayersSwap(player2);
     
-    cout << "Graczu 2 ustaw swoje statki:" << endl;
+    cout << player2.name << " ustaw swoje statki:" << endl;
     player2.setupShips(player2);
     
-    PlayersSwap();
+    PlayersSwap(player1);
 
     int x,y;
     bool gameover = false;
 
-    while (gameover == false)
+    while (!gameover)
     {
-        cout << "Graczu 1, oto twoja plansza:" << endl;
+        cout << player1.name << ", oto twoja plansza:" << endl;
         player1.ownBoard.display(false);
         cout << "Plansza przeciwnika:" << endl;
         player1.shotsBoard.display(true);
         player1.PlrShoot(player2, x, y);
 
-        if (player2.noShipsLeft() == true)
+        if (player2.noShipsLeft())
         {
-            cout << "Gracz 1 wygral!" << endl;
+            cout << player1.name << " wygral!" << endl;
             gameover = true;
             break;
         }
 
-        PlayersSwap();
+        PlayersSwap(player2);
 
-        cout << "Graczu 2, oto twoja plansza:" << endl;
+        cout << player2.name << ", oto twoja plansza:" << endl;
         player2.ownBoard.display(false);
         cout << "Plansza przeciwnika:" << endl;
         player2.shotsBoard.display(true);
         player2.PlrShoot(player1, x, y);
 
 
-        if (player1.noShipsLeft() == true)
+        if (player1.noShipsLeft())
         {
-            cout << "Gracz 2 wygral!" << endl;
+            cout << player2.name << " wygral!" << endl;
             gameover = true;
             break;
         }
 
-        PlayersSwap();
+        PlayersSwap(player1);
     };
     return 0;
 }
