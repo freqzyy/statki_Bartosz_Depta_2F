@@ -36,7 +36,8 @@ bool Board::placeship(Ship &ship, int x, int y, char direction)
             {
                 int checkX, checkY;
 
-                if (direction == 'h') {
+                if (direction == 'h') 
+                {
                     checkX = x + dx;
                     checkY = y + i + dy;
                 } 
@@ -46,8 +47,10 @@ bool Board::placeship(Ship &ship, int x, int y, char direction)
                     checkY = y + dy;
                 }
 
-                if (checkX >= 0 && checkX < size && checkY >= 0 && checkY < size) {
-                    if (board[checkX][checkY] == 'S') {
+                if (checkX >= 0 && checkX < size && checkY >= 0 && checkY < size) 
+                {
+                    if (board[checkX][checkY] == 'S') 
+                    {
                         return false;
                     }
                 }
